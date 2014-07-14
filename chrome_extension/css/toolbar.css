@@ -1,0 +1,206 @@
+body {
+    visibility: hidden;
+    background: transparent;
+    overflow: hidden;
+}
+
+nav.navbar.toolbar {
+    background: #F0F0F0;
+    -webkit-user-select: none;
+    border-bottom: 1px solid grey;
+    height:45px;
+    min-height: 45px;
+}
+
+.toolbar-buttons {
+    padding: 5px 0 5px 0;
+    border-bottom: 2px solid grey
+}
+
+.well-sm.trail-name {
+    background-color: white;
+    border: solid #ccc 1px;
+    padding-bottom: 3px
+}
+
+
+.fa-spinner.site-saving-spinner {
+    margin-top: 16px;
+    width: 0px;
+    overflow: hidden;
+}
+
+.save-site-button.saving {
+    cursor: not-allowed;
+}
+
+.trail-actions {
+    padding-left: 0px;
+}
+
+.favicons {
+    padding-top: 14px;
+}
+
+.favicon-img {
+    height: 18px;
+    vertical-align: top;
+    margin: 0px 5px;
+    display: block;
+    border: none;
+    float: left;
+}
+
+.active.favicon-img {
+    height: 21px;
+}
+
+.help-frame {
+    width: 100%;
+}
+
+.pager.wt-pagers {
+    margin: 0 0;
+}
+
+.info-display {
+    position: relative;
+    height: 0px;
+    overflow: hidden;
+    border-bottom: 1px solid;
+}
+
+.trail-preview-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+}
+
+.comment-text {
+    padding: 5px;
+}
+
+.login-button .logout-button {
+    display: none;
+}
+
+.wt-site-preview {
+    background: white;
+}
+
+.no-notes-butter-bar {
+    text-align: center;
+    padding: 8px 120px 8px 120px;
+}
+
+.no-notes-butter-bar-container {
+    text-align: center;
+    position: absolute;
+    z-index: 2;
+    height: 0;
+    overflow: hidden;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* note selector styles */
+
+.snap {
+    height:50px;
+    padding: 10px;
+}
+
+.note-content-cell {
+    width: 50%;
+}
+
+.note-content {
+    max-height: 1.2em;
+    line-height: 1.2em;
+    overflow: hidden;
+    padding-left: 20px;
+}
+
+.note-comment {
+    font-size: 12px;
+    overflow: hidden;
+    height: 34px; /* bootstrap adds 8px padding top and and bottom to the td, we need the total height to by 50px */
+}
+
+tr.buffer th {
+    height:50px;
+    text-align: center;
+    paadding-top:15px;
+}
+
+.note-selector {
+    overflow: scroll;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    -webkit-mask-image: linear-gradient(rgba(0,0,0,0) -30%, rgba(0,0,0,1), rgba(0,0,0,0) 130%);
+    visibility: hidden;
+    /*display: none;*/
+}
+
+.note-selector-background {
+    position: absolute;
+    background: white;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 3;
+    display: none;
+}
+
+.selected .note-content {
+    font-size: 20px;
+}
+
+.note-selector-favicon {
+    padding-right: 8px;
+    height: 20px;
+}
+
+.note-selector .table {
+    margin-bottom: 0px;
+}
+
+nav .nav-group {
+    padding-left: 0px;
+    padding-right: 0px;
+    margin-left: 5px;
+    margin-right: 0px;
+}
+
+/* needs to be fixed width in order to show up properly in the navbar element */
+.trail-selector-and-name {
+    width: 200px;
+}
+
+.icon-button {
+    height:30px;
+}
+
+/* small chevron */
+.glyphicon.mini-chevron {
+    font-size: 9px;
+}
+
+.add-trail-dropdown-item {
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100%;
+}
+
+.trail-dropdown-list .form-control.add-trail-dropdown-input {
+    min-width: 100px;
+    width: 100%;
+}

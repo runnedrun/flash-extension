@@ -1,0 +1,22 @@
+.preview-login-button {
+    cursor: pointer;
+}
+
+.explanation, .message-box {
+    text-align: center;
+}
+
+.message-box {
+    margin-top: 10px;
+}
+
+.help-div {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 2;
+    background: white;
+}
