@@ -12,7 +12,10 @@
     },
     "update_url": "http://webtrails.co/chrome_extension_update.xml",
     "background": {
-        "scripts": []
+        "scripts": [
+            "js/background/BackgroundRequests.js", "js/background/UrlResolver.js", "js/background/main.js",
+            "third_party_js/URI.js", "third_party_js/jquery.js"
+        ]
     },
     "content_scripts": [
         {
@@ -30,6 +33,10 @@
                 "js/TrailNameTypeahead.js", "js/InlineBootstrapStyles.js", "js/main.js"
                 ],
             "run_at": "document_start"
+        },
+        {   "matches": ["<all_urls>"],
+            "js": ["js/GetIframeHtml.js", "js/HtmlProcessor.js"],
+            "all_frames": true
         }
     ],
     "permissions": [

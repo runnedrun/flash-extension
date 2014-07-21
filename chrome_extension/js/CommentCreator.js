@@ -39,12 +39,12 @@ CommentCreator = function(trackedDocument) {
         }
     };
     var HTML = {
-        commentOverlay:
-            applyDefaultCSS($("<span></span>"))
+        commentOverlay: function() {
+            return applyDefaultCSS($("<span></span>"))
                 .css(CSS.commentOverlay)
                 .addClass("commentOverlay")
-                .addClass("webtrails"),
-
+                .addClass("webtrails")
+        },
         commentOverlayWrapper: function(top,left) {
             return applyDefaultCSS($("<span></span>"))
                 .css(CSS.commentOverlayWrapper)
@@ -423,7 +423,7 @@ CommentCreator = function(trackedDocument) {
                 left = offsets.left;
 
                 commentOverlayWrapper = HTML.commentOverlayWrapper(top, left);
-                commentOverlay = HTML.commentOverlay;
+                commentOverlay = HTML.commentOverlay();
 
                 commentOverlayWrapper.append(HTML.spacer);
                 commentOverlayWrapper.append(commentOverlay);

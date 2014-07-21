@@ -97,12 +97,12 @@ Comment = function(displayDoc, noteComment, clientSideId, spacing, noteId, onCom
     }
 
     function checkForNoteUpdateKeyPress(e){
-        console.log("checking for note post keypress");
+        console.log("checking for note update keypress");
         var code = (e.keyCode ? e.keyCode : e.which);
         if (code == 13 && !e.shiftKey){
             var newNoteContent = commentOverlay.html();
             commentOverlay.blur();
-            updateNoteText(newNoteContent, noteId, function(){ console.log("not submitted successfully") });
+            Requests.updateNoteText(newNoteContent, noteId, function(){ console.log("not submitted successfully") });
         } else if(code == 27){
             commentOverlay.blur();
         }
@@ -110,7 +110,7 @@ Comment = function(displayDoc, noteComment, clientSideId, spacing, noteId, onCom
 
     function deleteNote() {
         // we submit a fake note object here
-        deleteNoteRequest({id: noteId}, function(){
+        Requests.deleteNote({id: noteId}, function(){
             thisComment.remove();
         });
     }
@@ -126,7 +126,7 @@ Comment = function(displayDoc, noteComment, clientSideId, spacing, noteId, onCom
         if (event.noteDetails.clientSideId == clientSideId) {
             noteId = event.noteDetails.noteId;
             commentOverlay && commentOverlay.attr("contentEditable", true);
-            commentOverlay && commentOverlay.keypress(checkForNoteUpdateKeyPress);
+            commentOverlay && EventHandler.keypress({node: commentOverlay[0], callback: checkForNoteUpdateKeyPress});
         }
     }
 

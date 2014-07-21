@@ -1,7 +1,7 @@
 console.log("ajax_fns loaded");
 
 Requests = {
-    url: "http://localhost:5000",
+    baseUrl: "http://localhost:3000",
     addAcceptHeader: function(xhr, ajaxRequest) {
         xhr.setRequestHeader("Accept","application/json");
     },
@@ -9,7 +9,7 @@ Requests = {
     saveNote: function (note) {
         console.log("note is ", note);
         $.ajax({
-            url: Requests.url + "/note",
+            url: Requests.baseUrl + "/note",
             type: "post",
             data: {
                 "note":  note
@@ -19,17 +19,17 @@ Requests = {
                 $(document).trigger({
                     type: "noteIdReceived",
                     noteDetails: {
-                        noteId: resp.note_id,
-                        clientSideId: note.client_side_id
+                        noteId: resp.id,
+                        clientSideId: resp.clientSideId,
                     }
                 });
             }
         })
     },
 
-    deleteNoteRequest: function(note, callback) {
+    deleteNote: function(note, callback) {
         $.ajax({
-            url: Requests.url + "/note/delete",
+            url: Requests.baseUrl + "/note/delete",
             type: "post",
             beforeSend: Requests.addAcceptHeader,
             data: {
@@ -44,12 +44,12 @@ Requests = {
 
     updateNoteText: function(newComment, id, callback) {
         $.ajax({
-            url:  Requests.url + "/note/update",
+            url:  Requests.baseUrl + "/note/update",
             type: "post",
             beforeSend: Requests.addAcceptHeader,
             data: {
                 "id" : id,
-                "comment": newComment
+                "hint": newComment
             },
             success: function(e) { console.log("note saved"); callback(e) }
         });

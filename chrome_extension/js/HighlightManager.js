@@ -34,9 +34,16 @@ HighlightManager = function(trackedDoc) {
         return rangy.getSelection().getRangeAt(0);
     }
 
-    $(document).on("noteSubmitted", function(submittedEvent) {
+    $doc.on("noteSubmitted", function(submittedEvent) {
         new Comment(trackedDoc, submittedEvent.noteDetail.hint, submittedEvent.noteDetail.clientSideId);
     });
+
+    $doc.on("noteIdReceived", function(event) {
+        new HtmlProcessor({
+            noteId: event. noteDetails.noteId,
+            clientSideId: event.noteDetails.clientSideId
+        }).processAndSubmitCurrentPage();
+    })
 
     this.watchDocument = function() {
         $doc.mousedown(function() {

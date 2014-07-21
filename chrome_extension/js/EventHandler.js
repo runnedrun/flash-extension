@@ -7,17 +7,24 @@ EventHandler = new function() {
     var keyupHandlers = [];
     var self = this;
 
-    this.keyup = function(callback) { keyupHandlers.push(callback) };
+    this.keyup = function(handler) { keyupHandlers.push(handler) };
 
     this.removeKeyup = function(handler) { removeHandler(keyupHandlers, handler) };
 
-    this.keydown = function(callback) { keydownHandlers.push(callback) };
+    this.keydown = function(handler) { keydownHandlers.push(handler) };
 
     this.removeKeydown = function(handler) { removeHandler(keydownHandlers, handler) };
 
-    this.keypress = function(callback) { keypressHandlers.push(callback) };
+    this.keypress = function(handler) { keypressHandlers.push(handler) };
 
     this.removeKeypress = function(handler) { removeHandler(keypressHandlers, handler) };
+
+    // only for debugging;
+    this.clearHandlers = function() {
+        keydownHandlers.length = 0;
+        keypressHandlers.length = 0;
+        keyupHandlers.length = 0;
+    }
 
     function removeHandler(handlerList, handlerToRemove) {
         var handlerIndex = handlerList.length - 1
