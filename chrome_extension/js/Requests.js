@@ -20,7 +20,7 @@ Requests = {
                     type: "noteIdReceived",
                     noteDetails: {
                         noteId: resp.id,
-                        clientSideId: resp.clientSideId,
+                        clientSideId: note.clientSideId
                     }
                 });
             }

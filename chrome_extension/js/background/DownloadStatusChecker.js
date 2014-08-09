@@ -1,4 +1,4 @@
-DownloadStatusChecker = function(archiveLocation, tabId, siteId, revisionNumber, noteId, clientSideId) {
+DownloadStatusChecker = function(archiveLocation, tabId, noteId, clientSideId) {
     var retries = 0;
     var maxRetries = 20;
 
@@ -38,7 +38,7 @@ DownloadStatusChecker = function(archiveLocation, tabId, siteId, revisionNumber,
             }
         });
         var prefetched = {};
-        prefetched[siteId + revisionNumber] = {html: html, siteId: siteId, revisionNumber: revisionNumber};
+        prefetched[siteId + revisionNumber] = {html: html, revisionNumber: revisionNumber};
         retrieveTrailData(prefetched);
     }
 

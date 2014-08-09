@@ -192,16 +192,17 @@ UrlResolver = function(siteInfo, tabId){
                 html: processedHtml,
                 isIframe: isIframe,
                 processedStylesheets: processedStyleSheets,
-                originalToAwsUrlMap: originalToAwsUrlMap
+                originalToAwsUrlMap: originalToAwsUrlMap,
+                noteId: noteId
             })
             .then(function(resp){
                 if (!isIframe && resp.archiveLocation) {
-                    new DownloadStatusChecker(
-                        resp.archiveLocation,
-                        tabId,
-                        noteId,
-                        clientSideId
-                    );
+//                    new DownloadStatusChecker(
+//                        resp.archiveLocation,
+//                        tabId,
+//                        noteId,
+//                        clientSideId
+//                    );
                 }
             })
             .fail(function(){
@@ -227,6 +228,11 @@ UrlResolver = function(siteInfo, tabId){
         var extensionWithQuery = pathInParts.slice(1).pop() || "";
         var query = extensionWithQuery.split("?")[1] || "";
         var extension = extensionWithQuery.split("?")[0];
+
+        if (extension.indexOf("/") > -1) {
+            extension = ""
+        }
+
         var hostWithUnderscores = (new URI(baseURI)).host().replace(/\./, "_");
 
         pathInParts.pop();
@@ -241,8 +247,20 @@ UrlResolver = function(siteInfo, tabId){
         } else {
             shortPathWoExtension = hostWithUnderscores + "/" + shortPathWoExtension;
         }
+        var shortPath;
+        if (extension) {
+            shortPath = shortPathWoExtension + "." + extension;
+        } else {
+            shortPath = shortPathWoExtension;
+        }
 
-        var shortPath = shortPathWoExtension + "." + extension;
+
+        if (includeNoteId) {
+            console.log("path wo ext", shortPathWoExtension);
+            console.log("ext", extension);
+            console.log("path ext", shortPath)
+        }
+
         var escapedShortPath = $.map(shortPath.split("/"),function(sect,i){ return encodeURIComponent(sect) }).join("/");
 
         if(includeNoteId) {
