@@ -16,32 +16,25 @@ if (headElement && !headElement.classList.contains("wt-element")) {
 
 
 if (!isTopFrame && !isWtElement) {
-    console.log("setting listener for iframe saving");
-    chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
-        if (request.resolveIframeUrls){
-            console.log("checking if we need to parse this frame");
-            var siteInfo = request.resolveIframeUrls;
-            var frameLocation = window.location.href;
+    if (!window.FLASH_DEMO_MODE) {
+        console.log("setting listener for iframe saving");
+        chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
+            if (request.resolveIframeUrls){
+                console.log("checking if we need to parse this frame");
+                var siteInfo = request.resolveIframeUrls;
+                var frameLocation = window.location.href;
 
-            if (!(siteInfo.current_location == frameLocation)){
-                console.log("parsing this frame");
-                processor = new HtmlProcessor(extend(siteInfo, {iframe:true}));
-                processor.processAndSubmitCurrentPage();
-            }else{
-                console.log("top window, not sending message");
+                if (!(siteInfo.current_location == frameLocation)){
+                    console.log("parsing this frame");
+                    processor = new HtmlProcessor(extend(siteInfo, {iframe:true}));
+                    processor.processAndSubmitCurrentPage();
+                }else{
+                    console.log("top window, not sending message");
+                }
             }
-        }
-    })
+        })
+    }
 }
-
-//window.onkeyup = function(e) {
-//    console.log("picking up keypress from iframe");
-//    var code = (e.keyCode ? e.keyCode : e.which);
-//    if ((code == 27 || code == 18) && e.shiftKey) {    //tilda = 192, esc is code == 27
-//        chrome.runtime.sendMessage({iframeToolBarKeyPress: {keyCode: code, shiftKey: true}});
-//    }
-//}
-
 
 
 function extend(){

@@ -5,32 +5,34 @@ resourceDownloaderAddress = "http://localhost:3000";
 //domain = "http://www.webtrails.co";
 //domain_name = "webtrails.co";
 
-chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
-        if (request.resolveUrls) {
-            console.log("resolving urls")
-            var resolver = new UrlResolver(request.resolveUrls, sender.tab.id);
-            resolver.resolve();
+// Demo mode only runs on flashback.com
+if (!window.FLASH_DEMO_MODE) {
+    chrome.runtime.onMessage.addListener(
+        function(request, sender, sendResponse) {
+            if (request.resolveUrls) {
+                console.log("resolving urls")
+                var resolver = new UrlResolver(request.resolveUrls, sender.tab.id);
+                resolver.resolve();
 
-            if (!request.resolveUrls.iframe){
-                console.log("sending message to iframes")
-                chrome.tabs.sendRequest(sender.tab.id, { resolveIframeUrls: request.resolveUrls});
-            } else {
-                console.log("message sent to iframes, now getting parse requests from all iframes");
+                if (!request.resolveUrls.iframe){
+                    console.log("sending message to iframes")
+                    chrome.tabs.sendRequest(sender.tab.id, { resolveIframeUrls: request.resolveUrls});
+                } else {
+                    console.log("message sent to iframes, now getting parse requests from all iframes");
+                }
             }
         }
-    }
-);
+    );
 
-chrome.runtime.onMessageExternal.addListener(
-    function(request, sender, sendResponse) {
-        if (request.logInFromWebsite) {
-            console.log("getting a request to log in from the website");
-            signIn(request.logInFromWebsite);
+    chrome.runtime.onMessageExternal.addListener(
+        function(request, sender, sendResponse) {
+            if (request.logInFromWebsite) {
+                console.log("getting a request to log in from the website");
+                signIn(request.logInFromWebsite);
+            }
         }
-    }
-);
-
+    );
+}
 function sendSignOutMessageToAllTabs(){
     sendMessageToAllTabs({"logOutAllTabs":"logitout!"});
 }

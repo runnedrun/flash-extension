@@ -34,11 +34,13 @@ var HtmlProcessor = function(siteInfo) {
         siteInfo.baseUri                = document.baseURI;
         siteInfo.htmlAttributes         = htmlAttributes;
 
-        chrome.runtime.sendMessage({
-            resolveUrls: siteInfo
-        }, function(response){
-            console.log("html submitting for resolution");
-        });
+        if (!window.FLASH_DEMO_MODE) {
+            chrome.runtime.sendMessage({
+                resolveUrls: siteInfo
+            }, function(response){
+                console.log("html submitting for resolution");
+            });
+        }
     }
 
     function removeNodes(nodes) {

@@ -7,24 +7,29 @@ Requests = {
     },
 
     saveNote: function (note) {
+
         console.log("note is ", note);
-        $.ajax({
-            url: Requests.baseUrl + "/note",
-            type: "post",
-            data: {
-                "note":  note
-            },
-            beforeSend: Requests.addAcceptHeader,
-            success: function(resp){
-                $(document).trigger({
-                    type: "noteIdReceived",
-                    noteDetails: {
-                        noteId: resp.id,
-                        clientSideId: note.clientSideId
-                    }
-                });
-            }
-        })
+        if (window.FLASH_DEMO_MODE) {
+            console.log(note,'yeah');
+        } else {
+            $.ajax({
+                url: Requests.baseUrl + "/note",
+                type: "post",
+                data: {
+                    "note":  note
+                },
+                beforeSend: Requests.addAcceptHeader,
+                success: function(resp){
+                    $(document).trigger({
+                        type: "noteIdReceived",
+                        noteDetails: {
+                            noteId: resp.id,
+                            clientSideId: note.clientSideId
+                        }
+                    });
+                }
+            })
+        }
     },
 
     deleteNote: function(note, callback) {

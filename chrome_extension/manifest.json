@@ -25,7 +25,7 @@
         },
         {
             "matches": ["<all_urls>"],
-            "exclude_globs": ["http://localhost:3000/*", "http://*.webtrails.co/*"],
+            "exclude_globs": ["http://localhost:3000/*", "http://localhost:8000/*", "http://*.webtrails.co/*"],
             "js": ["third_party_js/jquery.js", "third_party_js/fuse.js","third_party_js/rangy-core.js",
                 "js/Requests.js", "js/EventHandler.js", "third_party_js/autoresize.js",
                 "js/CssPropertyDefaults.js", "js/HighlightManager.js",
